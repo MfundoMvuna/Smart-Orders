@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout';
@@ -59,30 +60,38 @@ export default class App extends Component {
         };
 
         return (
-            <>
-                <select onChange={(e) => this.setState({todosPerPage: parseInt(e.target.value) })}>
-                    <option value="10">10</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                </select>
-        <div>
-            {visibleTodos.map((todo) => (
-                <p key={todo.id}>{todo.title}</p>
-            ))}
-            <span onClick={prevPageHandler}>Prev</span>
-            <p>
-                {pages.map((page) => (
-                    <span
-                        key={page}
-                        onClick={() => this.handlePageClick(page)}
-                        className={`${this.state.currentPage === page ? "active" : ""}`}
-                    >{`${page}| `}</span>
-                ))}
-            </p>
-            <span onClick={nextPageHandler}>Next</span>
+            <div>
+                <div>
+                    <select onChange={(e) => this.setState({ todosPerPage: parseInt(e.target.value) })}>
+                        <option value="10">10</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+
+                    <Link to="/order">Go to Order Page</Link>
+
+                    {/* Conditionally render todos data */}
+                    {visibleTodos.length > 20 && (
+                        <div>
+                            {visibleTodos.map((todo) => (
+                                <p key={todo.id}>{todo.title}</p>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Render your pagination controls here... */}
                 </div>
-            </>
-    );
+                <Routes>
+                    {AppRoutes.map((route, index) => (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={route.element}
+                        />
+                    ))}
+                </Routes>
+            </div>
+        );
     }
     
 

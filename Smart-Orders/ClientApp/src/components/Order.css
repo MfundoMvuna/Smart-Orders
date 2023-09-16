@@ -1,0 +1,35 @@
+﻿.order-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.column {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Add additional styles as needed */
+
+
+/* Apply styles directly to the img element */
+img {
+    width: 200px;
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+h1 {
+    color: blue;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif,Arial, Helvetica, sans-serif;
+    text-align:center;
+}
